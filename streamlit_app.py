@@ -69,6 +69,7 @@ def create_kumu_element(
     permissions,
     mbfollowing,
     mbfollowers,
+    location
 ):
     ke = {
         "_id": id,
@@ -86,6 +87,7 @@ def create_kumu_element(
         "permissions": permissions,
         "microblog_following": mbfollowing,
         "microblog_followers": mbfollowers,
+        "location":location
     }
     return ke
 
