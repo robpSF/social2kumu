@@ -254,7 +254,7 @@ def main():
         st.error("No 'list' or 'items' found in characters.txt JSON. Please verify the TXPS format.")
         return
 
-    st.write(data_list)
+    #st.write(data_list)
     
     #data_list = characters_data["list"]
     permissions_count = {}
@@ -272,7 +272,7 @@ def main():
     # Step 3: Populate the matrix from the scenario data
     row_index = 1
     for persona in data_list:
-        st.write(persona)
+        #st.write(persona)
         uid = persona["uid"]
         permissions_str[uid] = " "
         permissions_count[uid] = 0
@@ -283,6 +283,8 @@ def main():
         a3e = get_A3E(tags)
         nato = get_affiliation(tags)
         roleplayer = persona["is_role_player"]
+        gps = persona["location"]["coords"]
+        st.write(gps)
 
         # Place data into array
         array[row_index][0] = name
@@ -290,6 +292,7 @@ def main():
         array[row_index][2] = a3e
         array[row_index][3] = nato
         array[row_index][4] = roleplayer
+        array[row_index][5] = gps
 
         # Parse permissions
         permissions = json.loads(persona["permissions"])
@@ -346,6 +349,7 @@ def main():
             tier = get_tier(tags)
             a3e = get_A3E(tags)
             nato = get_affiliation(tags)
+            location = persona["location"]["coords"]
 
             # Microblog data
             twitter = json.loads(persona["microblog"])
@@ -384,7 +388,7 @@ def main():
                 persona_permissions,
                 mbfollowing,
                 0,  # will update below
-                persona.get("gps", "")
+                gps
             )
             kumu_list.append(new_kp)
 
