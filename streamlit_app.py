@@ -254,7 +254,7 @@ def main():
         st.error("No 'list' or 'items' found in characters.txt JSON. Please verify the TXPS format.")
         return
 
-    st.write(data_list)
+   # st.write(data_list)
     
     #data_list = characters_data["list"]
     permissions_count = {}
@@ -385,7 +385,7 @@ def main():
             else:
                 coords_str = ""
 
-            st.write(coords_str)
+            #st.write(coords_str)
            
             new_kp = create_kumu_element(
                 uid,
