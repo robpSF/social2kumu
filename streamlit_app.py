@@ -69,6 +69,7 @@ def create_kumu_element(
     permissions,
     mbfollowing,
     mbfollowers,
+    gps
 ):
     ke = {
         "_id": id,
@@ -86,6 +87,7 @@ def create_kumu_element(
         "permissions": permissions,
         "microblog_following": mbfollowing,
         "microblog_followers": mbfollowers,
+        "location":gps
     }
     return ke
 
@@ -381,6 +383,7 @@ def main():
                 persona_permissions,
                 mbfollowing,
                 0,  # will update below
+                persona.get("gps", "")
             )
             kumu_list.append(new_kp)
 
