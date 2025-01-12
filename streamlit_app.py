@@ -251,6 +251,8 @@ def main():
     else:
         st.error("No 'list' or 'items' found in characters.txt JSON. Please verify the TXPS format.")
         return
+
+    st.write(data_list)
     
     #data_list = characters_data["list"]
     permissions_count = {}
