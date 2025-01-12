@@ -69,7 +69,6 @@ def create_kumu_element(
     permissions,
     mbfollowing,
     mbfollowers,
-    gps
 ):
     ke = {
         "_id": id,
@@ -87,7 +86,6 @@ def create_kumu_element(
         "permissions": permissions,
         "microblog_following": mbfollowing,
         "microblog_followers": mbfollowers,
-        "location":gps
     }
     return ke
 
@@ -254,7 +252,7 @@ def main():
         st.error("No 'list' or 'items' found in characters.txt JSON. Please verify the TXPS format.")
         return
 
-    #st.write(data_list)
+    st.write(data_list)
     
     #data_list = characters_data["list"]
     permissions_count = {}
@@ -272,7 +270,6 @@ def main():
     # Step 3: Populate the matrix from the scenario data
     row_index = 1
     for persona in data_list:
-        #st.write(persona)
         uid = persona["uid"]
         permissions_str[uid] = " "
         permissions_count[uid] = 0
@@ -283,8 +280,6 @@ def main():
         a3e = get_A3E(tags)
         nato = get_affiliation(tags)
         roleplayer = persona["is_role_player"]
-        gps = persona["location"]["coords"]
-        st.write(gps)
 
         # Place data into array
         array[row_index][0] = name
@@ -292,7 +287,6 @@ def main():
         array[row_index][2] = a3e
         array[row_index][3] = nato
         array[row_index][4] = roleplayer
-        array[row_index][5] = gps
 
         # Parse permissions
         permissions = json.loads(persona["permissions"])
@@ -349,7 +343,6 @@ def main():
             tier = get_tier(tags)
             a3e = get_A3E(tags)
             nato = get_affiliation(tags)
-            location = persona["location"]["coords"]
 
             # Microblog data
             twitter = json.loads(persona["microblog"])
@@ -374,6 +367,24 @@ def main():
             # Build the Kumu element
             # Trim trailing comma if needed:
             persona_permissions = permissions_str[uid][:-2] if permissions_str[uid] != " " else ""
+
+            location_str = persona.get("location", "")  # e.g. the string with coords, etc.
+            if location_str:
+                try:
+                    # 1) Convert from JSON string to Python dict
+                    location_dict = json.loads(location_str)
+                    
+                    # 2) Extract the coords string ("-27.48...,153.037...")
+                    coords_str = location_dict.get("coords", "")
+            
+                except json.JSONDecodeError:
+                    # location_str wasn't valid JSON
+                    coords_str = ""
+            else:
+                coords_str = ""
+
+            st.write(coords_str)
+           
             new_kp = create_kumu_element(
                 uid,
                 name,
@@ -388,7 +399,7 @@ def main():
                 persona_permissions,
                 mbfollowing,
                 0,  # will update below
-                gps
+                location=coords_str
             )
             kumu_list.append(new_kp)
 
@@ -419,3 +430,4 @@ def main():
 # -----------------------------------------------------------------------------
 if __name__ == "__main__":
     main()
+
