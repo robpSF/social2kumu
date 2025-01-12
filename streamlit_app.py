@@ -14,6 +14,15 @@ from docx.enum.text import WD_BREAK
 from zipfile2 import ZipFile
 import io
 
+def find_positions_file(zipf):
+    # for instance, find the first file that contains "positions" and ends with ".txt"
+    for name in zipf.namelist():
+        lower_name = name.lower()
+        if "positions" in lower_name and lower_name.endswith(".txt"):
+            return name
+    # if we never return inside the loop, there's no match
+    return None
+
 # -----------------------------------------------------------------------------
 # Streamlit Setup
 # -----------------------------------------------------------------------------
@@ -185,6 +194,8 @@ def get_persona_record(personas, persona_id):
     return {}
 
 def main():
+
+    
     # Step 1: Upload the .txps file
     st.subheader("Step 1: Upload TXPS File")
     uploaded_txps = st.file_uploader("Choose a .txps file", type=["txps"])
@@ -198,11 +209,17 @@ def main():
 
     # Step 2: Extract the needed files from the .txps (zip)
     with ZipFile(uploaded_txps, "r") as zipf:
+        # Try to find a positions file
+        positions_file = find_positions_file(zipf)
+        if not positions_file:
+            st.error("No valid 'positions' file found inside the ZIP.")
+            return
+
+        st.write(f"Found positions file: {positions_file}")
+
         with zipf.open(positions_file) as f:
             positions_data = json.load(f)
-        with zipf.open(characters_file) as f:
-            characters_data = json.load(f)
-
+            
     # Build position_names from positions_data
     position_names = {}
     for item in positions_data["list"]:
