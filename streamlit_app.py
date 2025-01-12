@@ -261,7 +261,8 @@ def main():
     # Our final matrix (row_count x col_count)
     row_count = len(data_list) + 1
     col_count = len(toprow)
-    array = np.full((row_count, col_count), " ")
+    #array = np.full((row_count, col_count), " ")
+    array = np.full((row_count, col_count), "", dtype=object)
     
     # Set header row
     array[0] = toprow
