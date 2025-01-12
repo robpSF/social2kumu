@@ -232,7 +232,15 @@ def main():
     toprow.append("count")
 
     # Prepare arrays for storing permissions data
-    data_list = characters_data["list"]
+    if "list" in characters_data:
+        data_list = characters_data["list"]
+    elif "items" in characters_data:
+        data_list = characters_data["items"]
+    else:
+        st.error("No 'list' or 'items' found in characters.txt JSON. Please verify the TXPS format.")
+        return
+    
+    #data_list = characters_data["list"]
     permissions_count = {}
     permissions_str = {}
 
