@@ -272,6 +272,7 @@ def main():
     # Step 3: Populate the matrix from the scenario data
     row_index = 1
     for persona in data_list:
+        st.write(persona)
         uid = persona["uid"]
         permissions_str[uid] = " "
         permissions_count[uid] = 0
