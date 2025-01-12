@@ -1,0 +1,6 @@
+streamlit
+docx
+numpy
+python-docx
+wget
+zipfile2
