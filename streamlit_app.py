@@ -231,6 +231,18 @@ def main():
         toprow.append(position_names[key])
     toprow.append("count")
 
+    characters_file = "characters.txt"
+
+    with ZipFile(uploaded_txps, "r") as zipf:
+        # 1. Check if characters_file exists in the zip
+        if characters_file not in zipf.namelist():
+            st.error(f"No {characters_file} found inside the TXPS.")
+            return
+        
+        # 2. Extract and load characters_data
+        with zipf.open(characters_file) as f:
+            characters_data = json.load(f)
+
     # Prepare arrays for storing permissions data
     if "list" in characters_data:
         data_list = characters_data["list"]
