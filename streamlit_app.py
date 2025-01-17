@@ -208,6 +208,7 @@ def main():
     # The original code references "positions id=2.txt" and "characters.txt"
     positions_file = "positions id=2.txt"
     characters_file = "characters.txt"
+    factions_file = "factions.txt"
 
     # Step 2: Extract the needed files from the .txps (zip)
     with ZipFile(uploaded_txps, "r") as zipf:
@@ -233,6 +234,21 @@ def main():
         toprow.append(position_names[key])
     toprow.append("count")
 
+    #FACTIONS
+    with ZipFile(uploaded_txps, "r") as zipf:
+    # 1. Check if factions exists in the zip
+    if factions_file not in zipf.namelist():
+        st.error(f"No {factions_file} found inside the TXPS.")
+        return
+    
+    # 2. Extract and load factions
+    with zipf.open(factions) as f:
+        factions_data = json.load(f)
+
+    st.write(factions_data)
+
+    
+    # CHARACTERS
     characters_file = "characters.txt"
 
     with ZipFile(uploaded_txps, "r") as zipf:
