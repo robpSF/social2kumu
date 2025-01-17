@@ -165,6 +165,10 @@ def check_if_missingv2(text):
     else:
         return text
 
+def get_faction(faction_id, faction_data):
+    faction = faction_data["list"][faction_id]["name"]
+    return faction
+
 def get_tier(tags_string):
     tiers = ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "T1", "T2", "T3", "T4", "T5", "T6", "T7"]
     return_tier = 99
@@ -293,6 +297,7 @@ def main():
 
         name = persona["name"].replace(",", "_")
         tags = persona["tags"]
+        faction = get_faction(persona["faction"],faction_data)
         tier = get_tier(tags)
         a3e = get_A3E(tags)
         nato = get_affiliation(tags)
@@ -351,7 +356,7 @@ def main():
     for persona in data_list:
         uid = persona["uid"]
         st.write(persona)
-        faction = check_if_missingv2(persona["faction"])
+        
         # Include this persona if it has permissions or is a roleplayer or do_the_lot
         if permissions_count[uid] > 0 or persona["is_role_player"] or do_the_lot:
             name = check_if_missingv2(persona["name"])
@@ -359,6 +364,7 @@ def main():
             bio = check_if_missingv2(persona["bio"])
             image = check_if_missingv2(persona["image_url"])
             tags = persona["tags"]
+            faction = get_faction(persona["faction"],faction_data)
             tier = get_tier(tags)
             a3e = get_A3E(tags)
             nato = get_affiliation(tags)
