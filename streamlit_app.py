@@ -297,8 +297,8 @@ def main():
 
         name = persona["name"].replace(",", "_")
         tags = persona["tags"]
-        st.write(persona)
-        faction = get_faction(persona["faction"],faction_data)
+        #st.write(persona)
+        faction = get_faction(persona["faction_id"],faction_data)
         tier = get_tier(tags)
         a3e = get_A3E(tags)
         nato = get_affiliation(tags)
@@ -365,7 +365,7 @@ def main():
             bio = check_if_missingv2(persona["bio"])
             image = check_if_missingv2(persona["image_url"])
             tags = persona["tags"]
-            faction = get_faction(persona["faction"],faction_data)
+            faction = get_faction(persona["faction_id"],faction_data)
             tier = get_tier(tags)
             a3e = get_A3E(tags)
             nato = get_affiliation(tags)
