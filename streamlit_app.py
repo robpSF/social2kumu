@@ -172,7 +172,7 @@ def get_faction(faction_id, faction_data):
     #st.write(faction_data["list"][int(faction_id)])
     try:
         faction = faction_data["list"][int(faction_id)]["name"]
-        st.write(faction)
+        #st.write(faction)
     except:
         faction = ""
     return faction
