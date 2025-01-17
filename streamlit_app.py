@@ -242,7 +242,7 @@ def main():
             return
         
         # 2. Extract and load factions
-        with zipf.open(factions) as f:
+        with zipf.open(factions_file) as f:
             factions_data = json.load(f)
             st.write(factions_data)
 
