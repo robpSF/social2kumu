@@ -364,7 +364,7 @@ def main():
 
     for persona in data_list:
         uid = persona["uid"]
-        st.write(persona)
+        #st.write(persona)
         
         # Include this persona if it has permissions or is a roleplayer or do_the_lot
         if permissions_count[uid] > 0 or persona["is_role_player"] or do_the_lot:
