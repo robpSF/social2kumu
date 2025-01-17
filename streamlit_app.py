@@ -335,6 +335,8 @@ def main():
 
     for persona in data_list:
         uid = persona["uid"]
+        st.write(persona)
+        faction = check_if_missingv2(persona["faction"])
         # Include this persona if it has permissions or is a roleplayer or do_the_lot
         if permissions_count[uid] > 0 or persona["is_role_player"] or do_the_lot:
             name = check_if_missingv2(persona["name"])
@@ -342,7 +344,6 @@ def main():
             bio = check_if_missingv2(persona["bio"])
             image = check_if_missingv2(persona["image_url"])
             tags = persona["tags"]
-            faction = check_if_missingv2(persona["faction"])
             tier = get_tier(tags)
             a3e = get_A3E(tags)
             nato = get_affiliation(tags)
