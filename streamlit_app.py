@@ -170,7 +170,11 @@ def get_faction(faction_id, faction_data):
     #st.write(faction_data["list"])
     #st.write(faction_id)
     #st.write(faction_data["list"][int(faction_id)])
-    faction = faction_data["list"][int(faction_id)]["name"]
+    try:
+        faction = faction_data["list"][int(faction_id)]["name"]
+        st.write(faction)
+    else:
+        faction = ""
     return faction
 
 def get_tier(tags_string):
