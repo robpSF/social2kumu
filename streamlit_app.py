@@ -342,6 +342,7 @@ def main():
             bio = check_if_missingv2(persona["bio"])
             image = check_if_missingv2(persona["image_url"])
             tags = persona["tags"]
+            faction = check_if_missingv2(persona["faction"])
             tier = get_tier(tags)
             a3e = get_A3E(tags)
             nato = get_affiliation(tags)
@@ -393,7 +394,7 @@ def main():
                 handle,
                 image,
                 "Person",
-                "",
+                faction,
                 a3e,
                 nato,
                 bio,
