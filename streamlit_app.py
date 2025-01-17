@@ -168,8 +168,9 @@ def check_if_missingv2(text):
 def get_faction(faction_id, faction_data):
     st.write(faction_data)
     st.write(faction_data["list"])
-    st.write(faction_data["list"][faction_id])
-    faction = faction_data["list"][faction_id]["name"]
+    st.write(faction_id)
+    st.write(faction_data["list"][int(faction_id)])
+    faction = faction_data["list"][int(faction_id)]["name"]
     return faction
 
 def get_tier(tags_string):
