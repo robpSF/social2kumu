@@ -172,8 +172,7 @@ def get_faction(faction_id, faction_data):
     #st.write(faction_data["list"][int(faction_id)])
 
     target_id = faction_id
-    item = faction_data["list"]
-    index = next((i for i, item in enumerate(data) if item["id"] == target_id), -1)
+    index = next((i for i, item in enumerate(faction_data["list"]) if item["id"] == target_id), -1)
 
     try:
         faction = faction_data["list"][index]["name"]
