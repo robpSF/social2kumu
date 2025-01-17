@@ -297,6 +297,7 @@ def main():
 
         name = persona["name"].replace(",", "_")
         tags = persona["tags"]
+        st.write(persona)
         faction = get_faction(persona["faction"],faction_data)
         tier = get_tier(tags)
         a3e = get_A3E(tags)
