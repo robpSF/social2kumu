@@ -236,16 +236,15 @@ def main():
 
     #FACTIONS
     with ZipFile(uploaded_txps, "r") as zipf:
-    # 1. Check if factions exists in the zip
-    if factions_file not in zipf.namelist():
-        st.error(f"No {factions_file} found inside the TXPS.")
-        return
-    
-    # 2. Extract and load factions
-    with zipf.open(factions) as f:
-        factions_data = json.load(f)
-
-    st.write(factions_data)
+        # 1. Check if factions exists in the zip
+        if factions_file not in zipf.namelist():
+            st.error(f"No {factions_file} found inside the TXPS.")
+            return
+        
+        # 2. Extract and load factions
+        with zipf.open(factions) as f:
+            factions_data = json.load(f)
+            st.write(factions_data)
 
     
     # CHARACTERS
